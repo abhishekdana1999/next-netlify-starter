@@ -1,11 +1,14 @@
 [
-    {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.atomyes",
-      "sha256_cert_fingerprints":
-      ["8B:2D:F0:D1:65:F5:12:29:F2:72:F0:34:DE:DF:A0:69:7E:8C:A7:0B:0E:F3:5C:4A:63:37:BA:4E:B5:44:02:7A"]
+      "sha256_cert_fingerprints": [
+        "8B:2D:F0:D1:65:F5:12:29:F2:72:F0:34:DE:DF:A0:69:7E:8C:A7:0B:0E:F3:5C:4A:63:37:BA:4E:B5:44:02:7A"
+      ]
     }
   }
 ]
