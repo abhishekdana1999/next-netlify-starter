@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dummy App Check</title>
+    <title>Yes App Check</title>
 </head>
 <body>
     <script>
@@ -35,7 +35,11 @@
             window.location.replace(url);
         } else {
             alert("Not found");
-            window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+            if(isAndroid) {
+                window.location.replace("market://details?id=com.atomyes");
+            }else if(iOS) {
+                window.location.replace("http://itunes.apple.com/lb/app/yes-bank/id626149883");
+            }
         }
     </script>
 </body>
