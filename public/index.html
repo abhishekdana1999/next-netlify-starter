@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Check</title>
+</head>
+<body>
+    <script>
+        
+
+
+        var appstoreFail = "https://fluffy-sprite-70e570.netlify.app";
+
+        //Check is device is iOS
+        var iOS = /(iPad|iPhone|iPod)/.test(navigator.userAgent);
+        var appUrlScheme = "android_app://com.atomyes";
+
+        if (iOS) {
+            // If the app is not installed the script will wait for 2sec and redirect to web.
+            var loadedAt = +new Date;
+            setTimeout(function() {
+                if (+new Date - loadedAt < 2000)
+                    window.location = appstoreFail;
+            } ,25);
+            // Try launching the app using URL schemes
+            window.open(appUrlScheme, "_self");
+        } else {
+            const url = "intent://fluffy-sprite-70e570.netlify.app/#Intent;scheme=https;package=com.atomyes.android;end";
+            window.location.replace(url);
+        }
+    </script>
+</body>
+</html>
