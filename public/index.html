@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YesAppV1 Check</title>
+    <title>YesAppV2 Check</title>
 </head>
 <body>
     <script>
@@ -15,7 +15,7 @@
 
         //Check is device is iOS
         var iOS = /(iPad|iPhone|iPod)/.test(navigator.userAgent);
-        var appUrlScheme = "android_app://com.atomyes";
+        var appUrlScheme = "com.atomyes://";
  
         // Check if device is android
         var ua = navigator.userAgent.toLowerCase();
@@ -31,7 +31,7 @@
             // Try launching the app using URL schemes
             window.open(appUrlScheme, "_self");
         } else if(isAndroid) {
-            const url = "intent://fluffy-sprite-70e570.netlify.app/#Intent;scheme=https;package=com.atomyes.android;end";
+            const url = "intent://com.atomyes/#Intent;scheme=https;package=com.atomyes;end";
             window.location.replace(url);
         } else {
             // alert("Not found");
