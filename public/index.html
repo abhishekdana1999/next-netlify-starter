@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YesApp Check</title>
+    <title>YesAppV1 Check</title>
 </head>
 <body>
     <script>
@@ -36,9 +36,9 @@
         } else {
             // alert("Not found");
             if(isAndroid) {
-                window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+                window.open("market://details?=com.atomyes","_system");
             }else if(iOS) {
-                window.location.replace("http://itunes.apple.com/lb/app/yes-bank/id626149883");
+                window.open("http://itunes.apple.com/lb/app/yes-bank/id626149883");
             }
         }
     </script>
