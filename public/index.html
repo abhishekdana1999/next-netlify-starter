@@ -16,6 +16,10 @@
         //Check is device is iOS
         var iOS = /(iPad|iPhone|iPod)/.test(navigator.userAgent);
         var appUrlScheme = "android_app://com.atomyes";
+ 
+        // Check if device is android
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
 
         if (iOS) {
             // If the app is not installed the script will wait for 2sec and redirect to web.
@@ -26,9 +30,12 @@
             } ,25);
             // Try launching the app using URL schemes
             window.open(appUrlScheme, "_self");
-        } else {
+        } else if(isAndroid) {
             const url = "intent://fluffy-sprite-70e570.netlify.app/#Intent;scheme=https;package=com.atomyes.android;end";
             window.location.replace(url);
+        } else {
+            alert("Not found");
+            window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
         }
     </script>
 </body>
