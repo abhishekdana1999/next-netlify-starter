@@ -31,15 +31,17 @@
             // Try launching the app using URL schemes
             window.open(appUrlScheme, "_self");
         } else if(isAndroid) {
+             // If the app is not installed the script will wait for 2sec and redirect to web.
+             var loadedAt = +new Date;
+            setTimeout(function() {
+                if (+new Date - loadedAt < 2000)
+                    window.open("market://details?id=com.atomyes","_system");
+            } ,25);
+            // Try launching the app using URL schemes
             const url = "intent://com.atomyes/#Intent;scheme=https;package=com.atomyes;end";
-            window.location.replace(url);
+            window.open(url);
         } else {
-            // alert("Not found");
-            if(isAndroid) {
-                window.open("market://details?id=com.atomyes","_system");
-            }else if(iOS) {
-                window.open("http://itunes.apple.com/lb/app/yes-bank/id626149883");
-            }
+           console.log("You are on browers");
         }
     </script>
 </body>
