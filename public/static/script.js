@@ -102,14 +102,39 @@ function launchUri(uri, successCallback, noHandlerCallback, unknownCallback) {
     }
 }
 
-launchUri('app://fluffy-sprite-70e570.netlify.app', function () {
+
+function androidOrIOS() {
+    const userAgent = navigator.userAgent;
+    if(/android/i.test(userAgent)){
+        return 'android';
+    }
+    if(/iPad|iPhone|iPod/i.test(userAgent)){
+        return 'ios';
+    }
+
+    return 'browser';
+}
+
+launchUri('app://com.atomyes/' + window.location.pathname, function () {
     // SUCCESS - the protocol is registered and the user was asked to open
     // the URI in the appropriate application
-    alert('Have fun with my app');
+    console.log("Great.");
 }, function () {
     // FAILURE - the protocol isn't registered
-    alert('Y u no install my app?');
+    if(androidOrIOS() == "android") {
+    window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+    }else if(androidOrIOS() == "ios") {
+        window.location.replace("https://apps.apple.com/in/app/yes-bank/id626149883")
+    } else {
+        window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+    }
 }, function () {
     // UNKNOWN - we don't know wether the protocol is registered or not
-    alert('Hey, did my app launch? If not, please install it. kthxbye');
+    if(androidOrIOS() == "android") {
+        window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+    }else if(androidOrIOS() == "ios") {
+            window.location.replace("https://apps.apple.com/in/app/yes-bank/id626149883")
+    } else {
+            window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+    }
 });
