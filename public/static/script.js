@@ -102,7 +102,7 @@ function launchUri(uri, successCallback, noHandlerCallback, unknownCallback) {
     }
 }
 
-launchUri('app://com.atomyes', function () {
+launchUri('app://fluffy-sprite-70e570.netlify.app', function () {
     // SUCCESS - the protocol is registered and the user was asked to open
     // the URI in the appropriate application
     alert('Have fun with my app');
