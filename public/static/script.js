@@ -116,14 +116,13 @@ function androidOrIOS() {
 }
 
 
-launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname, function (resp) {
-    alert("SUCCESS  " + resp);
-
+launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname, function () {
     // SUCCESS - the protocol is registered and the user was asked to open
     // the URI in the appropriate application
+    alert("SUCCESS");
     console.log("Great.");
-}, function (error) {
-    alert("Failure  " + error);
+}, function () {
+    alert("Failure  ");
 
     // FAILURE - the protocol isn't registered
     if(androidOrIOS() == "android") {
@@ -133,8 +132,8 @@ launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pa
     } else {
         window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
     }
-}, function (error) {
-    alert("UNKOWN  " + error);
+}, function () {
+    alert("UNKOWN  " );
     // UNKNOWN - we don't know wether the protocol is registered or not
     if(androidOrIOS() == "android") {
         window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
