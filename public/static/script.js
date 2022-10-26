@@ -116,9 +116,9 @@ function androidOrIOS() {
 }
 
 
-alert(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname);
+alert(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname);
 setTimeout(() => {
-launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname, function () {
+launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname, function () {
     // SUCCESS - the protocol is registered and the user was asked to open
     // the URI in the appropriate application
     console.log("Great.");
