@@ -116,13 +116,15 @@ function androidOrIOS() {
 }
 
 
-alert(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname);
-setTimeout(() => {
-launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname, function () {
+launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank:/' + window.location.pathname, function (resp) {
+    alert("SUCCESS  " + resp);
+
     // SUCCESS - the protocol is registered and the user was asked to open
     // the URI in the appropriate application
     console.log("Great.");
-}, function () {
+}, function (error) {
+    alert("Failure  " + error);
+
     // FAILURE - the protocol isn't registered
     if(androidOrIOS() == "android") {
     window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
@@ -131,7 +133,8 @@ launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pa
     } else {
         window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
     }
-}, function () {
+}, function (error) {
+    alert("UNKOWN  " + error);
     // UNKNOWN - we don't know wether the protocol is registered or not
     if(androidOrIOS() == "android") {
         window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
@@ -141,4 +144,3 @@ launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pa
             window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
     }
 });
-}, 2000);
