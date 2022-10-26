@@ -115,6 +115,10 @@ function androidOrIOS() {
     return 'browser';
 }
 
+
+alert(androidOrIOS());
+setTimeout(() => {
+    
 launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname, function () {
     // SUCCESS - the protocol is registered and the user was asked to open
     // the URI in the appropriate application
@@ -138,3 +142,4 @@ launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pa
             window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
     }
 });
+}, 2000);
