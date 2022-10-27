@@ -124,8 +124,7 @@ if (androidOrIOS() == "ios") {
         }
     }, 300);
 } else {
-    alert('atomyes://' + window.location.pathname.slice(1));
-    launchUri(androidOrIOS() == "android" ? 'atomyes://' + window.location.pathname.slice(1) : 'yesbank://' + window.location.pathname.slice(1), function () {
+    launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
         // the URI in the appropriate application
    
