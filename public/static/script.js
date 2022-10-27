@@ -105,44 +105,44 @@ function launchUri(uri, successCallback, noHandlerCallback, unknownCallback) {
 
 function androidOrIOS() {
     const userAgent = navigator.userAgent;
-    if(/android/i.test(userAgent)){
+    if (/android/i.test(userAgent)) {
         return 'android';
     }
-    if(/iPad|iPhone|iPod/i.test(userAgent)){
+    if (/iPad|iPhone|iPod/i.test(userAgent)) {
         return 'ios';
     }
 
     return 'browser';
 }
 
+if (androidOrIOS() == "ios") {
+    window.location.href = 'yesbank://' + window.location.pathname.slice(1);
+} else {
+    launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
+        // SUCCESS - the protocol is registered and the user was asked to open
+        // the URI in the appropriate application
+        alert("SUCCESS");
+        console.log("Great.");
+    }, function () {
+        alert("Failure  ");
 
-alert("IsAndroidOrIos : " + androidOrIOS());
-alert("Check URI : " +'yesbank://' + window.location.pathname.slice(1));
-window.location.href ='yesbank://' + window.location.pathname.slice(1); 
-launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
-    // SUCCESS - the protocol is registered and the user was asked to open
-    // the URI in the appropriate application
-    alert("SUCCESS");
-    console.log("Great.");
-}, function () {
-    alert("Failure  ");
-
-    // FAILURE - the protocol isn't registered
-    if(androidOrIOS() == "android") {
-    window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
-    }else if(androidOrIOS() == "ios") {
-        window.location.replace("https://apps.apple.com/in/app/yes-bank/id626149883")
-    } else {
-        window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
-    }
-}, function () {
-    alert("UNKOWN  " );
-    // UNKNOWN - we don't know wether the protocol is registered or not
-    if(androidOrIOS() == "android") {
-        window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
-    }else if(androidOrIOS() == "ios") {
-            window.location.replace("https://apps.apple.com/in/app/yes-bank/id626149883")
-    } else {
+        // FAILURE - the protocol isn't registered
+        if (androidOrIOS() == "android") {
             window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
-    }
-});
+        } else if (androidOrIOS() == "ios") {
+            window.location.replace("https://apps.apple.com/in/app/yes-bank/id626149883")
+        } else {
+            window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+        }
+    }, function () {
+        alert("UNKOWN  ");
+        // UNKNOWN - we don't know wether the protocol is registered or not
+        if (androidOrIOS() == "android") {
+            window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+        } else if (androidOrIOS() == "ios") {
+            window.location.replace("https://apps.apple.com/in/app/yes-bank/id626149883")
+        } else {
+            window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
+        }
+    });
+}
