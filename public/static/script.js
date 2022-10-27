@@ -119,7 +119,7 @@ if (androidOrIOS() == "ios") {
     window.location.href = 'yesbank://' + window.location.pathname.slice(1);
     setTimeout(function() {
         window.location.href='https://apps.apple.com/in/app/yes-bank/id626149883';
-    }, 700);
+    }, 2000);
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
