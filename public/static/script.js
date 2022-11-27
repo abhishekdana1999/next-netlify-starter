@@ -116,15 +116,15 @@ function androidOrIOS() {
 }
 
 if (androidOrIOS() == "ios") {
-    try {
-        window.location.replace('yesbank://' + window.location.pathname.slice(1));
-    } catch (error) {
-    setTimeout(function () {
-        if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-            window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
-        }
-    }, 250);    
-    }
+    var iframe = createHiddenIframe();
+        iframe.contentWindow.location.href = 'yesbank://' + window.location.pathname.slice(1);
+        window.setTimeout(function () {
+            removeHiddenIframe(parent);
+            if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+                window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
+            }
+        }, 500);
+    
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
