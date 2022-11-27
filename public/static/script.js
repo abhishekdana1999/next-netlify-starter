@@ -134,10 +134,12 @@ function androidOrIOS() {
 }
 
 if (androidOrIOS() == "ios") {
-
+    alert("Yes Its IOS");
    var popup = window.open('', 'launcher', 'width=0,height=0');
         popup.location.href = 'yesbank://' + window.location.pathname.slice(1);
         try {
+    alert("Yes Its IOS try block");
+
             // Try to change the popup's location - if it fails, the protocol isn't registered
             // and we'll end up in the `catch` block.
             popup.location.href = 'about:blank';
@@ -150,12 +152,15 @@ if (androidOrIOS() == "ios") {
                 if (popup.closed) window.clearInterval(timer);
             }, 500);
         } catch (e) {
+    alert("Yes Its IOS catch block");
+
             // Regain access to the popup in order to close it.
             popup = window.open('about:blank', 'launcher');
-            popup.close();
+          
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
             }
+            popup.close();
         }
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
