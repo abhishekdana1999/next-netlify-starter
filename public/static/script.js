@@ -135,17 +135,15 @@ function androidOrIOS() {
 
 if (androidOrIOS() == "ios") {
     iframe = createHiddenIframe();
-        iframe.contentWindow.location.href = 'yesbank://' + window.location.pathname.slice(1);
-        window.setTimeout(function () {
-            removeHiddenIframe(parent);
-          
-        }, 500);
-    // window.location.replace('yesbank://' + window.location.pathname.slice(1));
-    setTimeout(function () {
-        if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-            window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
-        }
-    }, 250);
+    iframe.contentWindow.location.href = 'yesbank://' + window.location.pathname.slice(1);
+    window.setTimeout(function () {
+        removeHiddenIframe(parent);
+       setTimeout(() => {
+            if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+                window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
+            }
+       }, 1000);
+    }, 500);
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
