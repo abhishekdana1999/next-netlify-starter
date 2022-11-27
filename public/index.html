@@ -126,6 +126,18 @@ function androidOrIOS() {
     return 'browser';
 }
 
+
+
+
+function removeHiddenIframe(parent) {
+    if (!iframe) return;
+    if (!parent) parent = document.body;
+    parent.removeChild(iframe);
+    iframe = null;
+}
+
+
+
 if (androidOrIOS() == "ios") {
     var iframe = createHiddenIframe();
         iframe.contentWindow.location.href = 'yesbank://' + window.location.pathname.slice(1);
