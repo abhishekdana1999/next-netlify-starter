@@ -126,6 +126,15 @@ function androidOrIOS() {
     return 'browser';
 }
 
+if (androidOrIOS() == "ios") {
+
+    window.location.href = 'yesbank://' + window.location.pathname.slice(1);
+    setTimeout(function () {
+        if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+            window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+        }
+    }, 250);
+} else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
         // the URI in the appropriate application
@@ -151,7 +160,7 @@ function androidOrIOS() {
             window.location.replace("https://play.google.com/store/apps/details?id=com.atomyes");
         }
     });
-
+}
     </script>
 </body>
 
