@@ -119,10 +119,10 @@ if (androidOrIOS() == "ios") {
 
     setTimeout(function () {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-            window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+            window.location = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }
     }, 25);
-    window.location.href = 'yesbank://' + window.location.pathname.slice(1);
+    window.location = 'yesbank://' + window.location.pathname.slice(1);
 
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
