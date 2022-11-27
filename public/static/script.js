@@ -134,16 +134,29 @@ function androidOrIOS() {
 }
 
 if (androidOrIOS() == "ios") {
-    iframe = createHiddenIframe();
-    iframe.contentWindow.location.href = 'yesbank://' + window.location.pathname.slice(1);
-    window.setTimeout(function () {
-        removeHiddenIframe(parent);
-       setTimeout(() => {
+
+   var popup = window.open('', 'launcher', 'width=0,height=0');
+        popup.location.href = 'yesbank://' + window.location.pathname.slice(1);
+        try {
+            // Try to change the popup's location - if it fails, the protocol isn't registered
+            // and we'll end up in the `catch` block.
+            popup.location.href = 'about:blank';
+            
+            // The user will be shown a modal dialog to allow the external application. While
+            // this dialog is open, we cannot close the popup, so we try again and again until
+            // we succeed.
+            timer = window.setInterval(function () {
+                popup.close();
+                if (popup.closed) window.clearInterval(timer);
+            }, 500);
+        } catch (e) {
+            // Regain access to the popup in order to close it.
+            popup = window.open('about:blank', 'launcher');
+            popup.close();
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
             }
-       }, 1000);
-    }, 500);
+        }
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
