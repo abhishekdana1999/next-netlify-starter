@@ -103,24 +103,6 @@ function launchUri(uri, successCallback, noHandlerCallback, unknownCallback) {
 }
 
 
-function createHiddenIframe(parent) {
-    var iframe;
-    if (!parent) parent = document.body;
-    iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    parent.appendChild(iframe);
-    return iframe;
-}
-
-function removeHiddenIframe(parent) {
-    if (!iframe) return;
-    if (!parent) parent = document.body;
-    parent.removeChild(iframe);
-    iframe = null;
-}
-
-
-
 function androidOrIOS() {
     const userAgent = navigator.userAgent;
     if (/android/i.test(userAgent)) {
@@ -134,34 +116,14 @@ function androidOrIOS() {
 }
 
 if (androidOrIOS() == "ios") {
-    alert("Yes Its IOS");
-   var popup = window.open('', 'launcher', 'width=0,height=0');
-        popup.location.href = 'yesbank://' + window.location.pathname.slice(1);
-        try {
-    alert("Yes Its IOS try block");
 
-            // Try to change the popup's location - if it fails, the protocol isn't registered
-            // and we'll end up in the `catch` block.
-            popup.location.href = 'about:blank';
-            
-            // The user will be shown a modal dialog to allow the external application. While
-            // this dialog is open, we cannot close the popup, so we try again and again until
-            // we succeed.
-            timer = window.setInterval(function () {
-                popup.close();
-                if (popup.closed) window.clearInterval(timer);
-            }, 500);
-        } catch (e) {
-    alert("Yes Its IOS catch block");
-
-            // Regain access to the popup in order to close it.
-            popup = window.open('about:blank', 'launcher');
-          
-            if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-                window.location.replace('https://apps.apple.com/in/app/yes-bank/id626149883');
-            }
-            popup.close();
+    setTimeout(function () {
+        if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+            window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }
+    }, 25);
+    window.location.href = 'yesbank://' + window.location.pathname.slice(1);
+
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
