@@ -122,10 +122,10 @@ if (androidOrIOS() == "ios") {
             window.location = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }
     }, 25);
-    window.location = 'yesbank://' + window.location.pathname.slice(1);
+    window.location = 'yesmobileapp://' + window.location.pathname.slice(1);
 
 } else {
-    launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesbank://' + window.location.pathname.slice(1), function () {
+    launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesmobileapp://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
         // the URI in the appropriate application
    
