@@ -116,29 +116,40 @@ function androidOrIOS() {
 }
 
 
-window.onerror = function(error) {
-    if(error.includes("Safari cannot open the page")) {
+window.onerror = function (error) {
+    if (error.includes("Safari cannot open the page")) {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-        }   
+        }
     }
 }
 
 if (androidOrIOS() == "ios") {
-    try {
-        window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_self");
-    } catch(e) {
-        alert("This is error " + e);
-        console.log("Error" , e);
+    if (navigator.standalone) {
+        window.open('yesmobileapp://' + window.location.pathname.slice(1), "_self");
+    } else {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-        }     
+        }
     }
+    // try {
+    //     if(navigator.standalone) {
+    //     window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_self");
+    //     }else {
+    //         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+    //             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+    //         }    
+    //     }
+    // } catch(e) {
+    //     alert("This is error " + e);
+    //     console.log("Error" , e);
+
+    // }
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesmobileapp://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
         // the URI in the appropriate application
-   
+
         console.log("Great.");
     }, function () {
 
