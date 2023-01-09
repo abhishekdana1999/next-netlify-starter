@@ -117,7 +117,7 @@ function androidOrIOS() {
 
 
 window.onerror = function(error) {
-    if(error == "Safari cannot open this page because the address is invalid") {
+    if(error.includes("Safari cannot open the page")) {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }   
