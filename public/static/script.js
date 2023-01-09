@@ -117,7 +117,7 @@ function androidOrIOS() {
 
 if (androidOrIOS() == "ios") {
     try {
-    window.location.href = 'yesmobileapp://' + window.location.pathname.slice(1);
+        window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_self");
     } catch(e) {
         console.log("Error" , e);
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
