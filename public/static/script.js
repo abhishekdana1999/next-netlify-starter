@@ -125,38 +125,20 @@ window.onerror = function (error) {
 }
 
 if (androidOrIOS() == "ios") {
-    // let appWindow = window.open('yesmobileapp://' + window.location.pathname.slice(1));
-    // alert(appWindow);
-    // if (!appWindow) {
-    //     if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-    //         window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-    //     }
-    // }
-
-    
-        alert(navigator.userAgent.indexOf("yesmobileapp://"));
-        if(navigator.userAgent.indexOf('yesmobileapp://' + window.location.pathname.slice(1)) == -1) {
+        try {
+            var now = new Date().valueOf();
+            setTimeout(() => {
+                if(new Date().valueOf() - now > 100) return;
+                    if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+                        window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+                    }
+            }, 25);
             window.location.href='yesmobileapp://' + window.location.pathname.slice(1)
-        }else {
+        } catch (error) {
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
             }
         }
-   
-   
-    // try {
-    //     if(navigator.standalone) {
-    //     window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_self");
-    //     }else {
-    //         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-    //             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-    //         }    
-    //     }
-    // } catch(e) {
-    //     alert("This is error " + e);
-    //     console.log("Error" , e);
-
-    // }
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesmobileapp://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
