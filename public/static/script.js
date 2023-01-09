@@ -115,14 +115,24 @@ function androidOrIOS() {
     return 'browser';
 }
 
-if (androidOrIOS() == "ios") {
-    window.location.href = 'yesmobileapp://' + window.location.pathname.slice(1);
-    setTimeout(function () {
+
+function checkIfSafariCanOpenPage(url) {
+    fetch(url).then(response => {
+        if(response.ok) {
+            window.location.href = 'yesmobileapp://' + window.location.pathname.slice(1);
+        }else {
+            if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+                window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+            }
+        }
+    }).catch(e => {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }
-    }, 2500);
-
+    })
+}
+if (androidOrIOS() == "ios") {
+   checkIfSafariCanOpenPage("yesmobileapp://");
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesmobileapp://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
