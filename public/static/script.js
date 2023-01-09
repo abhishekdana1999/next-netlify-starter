@@ -115,6 +115,15 @@ function androidOrIOS() {
     return 'browser';
 }
 
+
+window.onerror = function(error) {
+    if(error == "Safari cannot open this page because the address is invalid") {
+        if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+            window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+        }   
+    }
+}
+
 if (androidOrIOS() == "ios") {
     try {
         window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_self");
