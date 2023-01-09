@@ -125,13 +125,20 @@ window.onerror = function (error) {
 }
 
 if (androidOrIOS() == "ios") {
-    let appWindow = window.open('yesmobileapp://' + window.location.pathname.slice(1));
-    alert(appWindow);
-    if (!appWindow) {
+    // let appWindow = window.open('yesmobileapp://' + window.location.pathname.slice(1));
+    // alert(appWindow);
+    // if (!appWindow) {
+    //     if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+    //         window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+    //     }
+    // }
+
+    window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
+    setTimeout(() => {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }
-    }
+    }, 2000);
     // try {
     //     if(navigator.standalone) {
     //     window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_self");
