@@ -125,9 +125,8 @@ window.onerror = function (error) {
 }
 
 if (androidOrIOS() == "ios") {
-    if (navigator.standalone) {
-        window.open('yesmobileapp://' + window.location.pathname.slice(1), "_self");
-    } else {
+    let appWindow = window.open('yesmobileapp://' + window.location.pathname.slice(1));
+    if (!appWindow) {
         if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
             window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
         }
