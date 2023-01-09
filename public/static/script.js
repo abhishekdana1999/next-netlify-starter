@@ -132,19 +132,15 @@ if (androidOrIOS() == "ios") {
     //         window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
     //     }
     // }
-    try {
-        if(window.location.href='yesmobileapp://' + window.location.pathname.slice(1)) {
+    
+        if(navigator.userAgent.indexOf('yesmobileapp://' + window.location.pathname.slice(1)) == -1) {
             window.location.href='yesmobileapp://' + window.location.pathname.slice(1)
         }else {
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
             }
         }
-    } catch (error) {
-        if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-            window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-        }
-    }
+   
    
     // try {
     //     if(navigator.standalone) {
