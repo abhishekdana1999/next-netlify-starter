@@ -132,7 +132,9 @@ if (androidOrIOS() == "ios") {
     //         window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
     //     }
     // }
+
     
+        alert(navigator.userAgent.indexOf("yesmobileapp://"));
         if(navigator.userAgent.indexOf('yesmobileapp://' + window.location.pathname.slice(1)) == -1) {
             window.location.href='yesmobileapp://' + window.location.pathname.slice(1)
         }else {
