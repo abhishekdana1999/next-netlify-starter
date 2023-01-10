@@ -127,16 +127,18 @@ window.onerror = function (error) {
 function checkApp(url) {
     var iframe = document.createElement("iframe");
     iframe.src = url;
+    iframe.style.display = "none";
     document.body.appendChild(iframe);
-    setTimeout(() => {
-        if(iframe) {
+    iframe.onload = function() {
+        if(iframe.src == "about:blank") {
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
             }
         }else {
             window.location.href=url;
         }
-    }, 1000);
+    }
+    
 }
 
 if (androidOrIOS() == "ios") {
