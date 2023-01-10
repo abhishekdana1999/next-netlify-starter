@@ -128,7 +128,7 @@ window.onerror = function (error) {
 
 if (androidOrIOS() == "ios") {
     
-        var mywindow = null
+        
         try {
             window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
         } catch (error) {
