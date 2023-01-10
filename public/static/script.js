@@ -126,14 +126,8 @@ window.onerror = function (error) {
 
 if (androidOrIOS() == "ios") {
         try {
-            var now = new Date().valueOf();
-            setTimeout(() => {
-                if(new Date().valueOf() - now > 100) return;
-                    if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-                        window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-                    }
-            }, 25);
-            window.location.href='yesmobileapp://' + window.location.pathname.slice(1)
+            window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_blank");
+            //window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
         } catch (error) {
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
