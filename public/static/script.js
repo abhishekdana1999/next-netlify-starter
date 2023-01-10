@@ -138,7 +138,6 @@ function checkApp(url) {
             window.location.href=url;
         }
     }
-    
 }
 
 if (androidOrIOS() == "ios") {
