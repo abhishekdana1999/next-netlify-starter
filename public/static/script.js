@@ -124,14 +124,37 @@ window.onerror = function (error) {
     }
 }
 
+
+function isValidURL(url) {
+    var encodedURL = encodeURIComponent(url);
+    var isValid = false;
+
+    $.ajax({
+      url: url,
+      type: "get",
+      async: false,
+      dataType: "json",
+      success: function(data) {
+        isValid = data.query.results != null;
+      },
+      error: function(){
+        isValid = false;
+      }
+    });
+
+    return isValid;
+}
+
 if (androidOrIOS() == "ios") {
         var mywindow = null;
         try {
-            alert("First CheckPoint");
-           mywindow = window.open('yesmobileapp://' + window.location.pathname.slice(1));
-         //  mywindow.document.title = "My dummy title";
-           alert("Second CheckPoint " + JSON.stringify(mywindow));
-
+            if(!isValidURL('yesmobileapp://' + window.location.pathname.slice(1))) {
+                if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+                    window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+                }
+            }else {
+                window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
+            }
             //window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
         } catch (error) {
            alert("Catch CheckPoint " + JSON.stringify(error));
