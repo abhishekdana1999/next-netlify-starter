@@ -125,13 +125,15 @@ window.onerror = function (error) {
 }
 
 if (androidOrIOS() == "ios") {
+        var mywindow = null;
         try {
-
-           var mywindow =  window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_blank");
+           window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_blank");
            mywindow.document.title = "My dummy title";
-           alert(mywindow);
             //window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
         } catch (error) {
+            if(mywindow != null) {
+                mywindow.close();
+            }
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
                 window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
             }
