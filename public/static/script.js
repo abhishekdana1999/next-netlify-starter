@@ -124,48 +124,37 @@ window.onerror = function (error) {
     }
 }
 
-
-function isValidURL(url) {
-    var encodedURL = encodeURIComponent(url);
-    var isValid = false;
-
-    $.ajax({
-      url: url,
-      type: "get",
-      async: false,
-      dataType: "json",
-      success: function(data) {
-        isValid = data.query.results != null;
-      },
-      error: function(){
-        isValid = false;
-      }
-    });
-
-    return isValid;
+function checkApp(url) {
+    var iframe = document.createElement("iframe");
+    iframe.src = url;
+    document.body.appendChild(iframe);
+    setTimeout(() => {
+        if(iframe) {
+            if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+                window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+            }
+        }else {
+            window.location.href=url;
+        }
+    }, 1000);
 }
 
 if (androidOrIOS() == "ios") {
         var mywindow = null;
-        try {
-            if(!isValidURL('yesmobileapp://' + window.location.pathname.slice(1))) {
-                if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-                    window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-                }
-            }else {
-                window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
-            }
-            //window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
-        } catch (error) {
-           alert("Catch CheckPoint " + JSON.stringify(error));
 
-            if(mywindow != null) {
-                mywindow.close();
-            }
-            if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
-                window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
-            }
-        }
+        checkApp(window.location.href='yesmobileapp://' + window.location.pathname.slice(1))
+        // try {
+           
+        //     //window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
+        // } catch (error) {
+          
+        //     if(mywindow != null) {
+        //         mywindow.close();
+        //     }
+        //     if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
+        //         window.location.href = 'https://apps.apple.com/in/app/yes-bank/id626149883';
+        //     }
+        // }
 } else {
     launchUri(androidOrIOS() == "android" ? 'app://com.atomyes' + window.location.pathname : 'yesmobileapp://' + window.location.pathname.slice(1), function () {
         // SUCCESS - the protocol is registered and the user was asked to open
