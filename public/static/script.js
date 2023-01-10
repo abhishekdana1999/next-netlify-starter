@@ -129,7 +129,7 @@ if (androidOrIOS() == "ios") {
 
            var mywindow =  window.open('yesmobileapp://' + window.location.pathname.slice(1) , "_blank");
            mywindow.document.title = "My dummy title";
-           
+           alert(mywindow);
             //window.location.href='yesmobileapp://' + window.location.pathname.slice(1);
         } catch (error) {
             if (confirm('You do not seem to have Yesbank app installed, do you want to go download it now?')) {
